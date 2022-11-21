@@ -1,0 +1,23 @@
+version: '3'
+services:
+  setup:
+    build: .
+    command: bash -c "python manage.py migrate && python manage.py runserver
+      0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      DEBUG: "true"
+      DATABASE_URL: "postgres://local:local@db:5432/ssapi"
+    depends_on:
+      - db
+  db:
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=local
+      - POSTGRES_PASSWORD=local
+      - POSTGRES_DB=ssapi
+    ports:
+      - "5432:5432"
