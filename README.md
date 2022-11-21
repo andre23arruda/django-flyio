@@ -26,6 +26,19 @@ Esse projeto está sendo desenvolvido com as seguintes tecnologias:
 
 ## 🔧 Passo a passo
 
+### Rodar local
+```sh
+# Renomear .env.example para .env
+cp .env.example .env
+# ADICIONE OS VALORES CORRETOS
+
+docker-compose up
+
+# docker-compose run <docker_service> python manage.py createsuperuser # criar superusuario
+docker-compose run api python manage.py createsuperuser # criar superusuario
+```
+
+
 ### Create account
 https://fly.io/dashboard
 
