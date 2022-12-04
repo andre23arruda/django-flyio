@@ -1,6 +1,6 @@
 # fly.toml file generated for restless-pine-9682 on 2021-12-19T15:00:01-05:00
 
-app = "green-night-8385"
+app = "your-app-name"
 
 kill_signal = "SIGINT"
 kill_timeout = 5
@@ -18,16 +18,14 @@ processes = []
   internal_port = 8000
   protocol = "tcp"
 
-
   [[services.http_checks]]
     interval = "15s"
     grace_period = "5s"
     method = "get"
-    path = "/ping"
+    path = "/ping/"
     protocol = "http"
     timeout = "2s"
     tls_skip_verify = false
-
 
   [services.concurrency]
     hard_limit = 25
