@@ -1,5 +1,5 @@
 from pathlib import Path
-import sys, os
+import json, os, sys
 import dj_database_url
 from dotenv import load_dotenv
 
@@ -134,5 +134,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 if ENVIRONMENT == 'PROD':
     USE_X_FORWARDED_HOST = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# CORS
+# CORS_ORIGIN_ALLOW_ALL = False
+# CORS_ORIGIN_WHITELIST = json.loads(os.getenv('CORS_ALLOWED_ORIGINS', '[]'))
 
 from .theme import JAZZMIN_SETTINGS, JAZZMIN_UI_TWEAKS
