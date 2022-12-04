@@ -32,12 +32,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
     'drf_yasg',
     'ssapi',
     'ping',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -66,7 +68,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'setup.wsgi.application'
-
 
 # Database
 DATABASES = {
@@ -136,7 +137,7 @@ if ENVIRONMENT == 'PROD':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # CORS
-# CORS_ORIGIN_ALLOW_ALL = False
-# CORS_ORIGIN_WHITELIST = json.loads(os.getenv('CORS_ALLOWED_ORIGINS', '[]'))
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = json.loads(os.getenv('CORS_ALLOWED_ORIGINS', '[]'))
 
 from .theme import JAZZMIN_SETTINGS, JAZZMIN_UI_TWEAKS
