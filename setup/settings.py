@@ -3,17 +3,12 @@ import json, os, sys
 import dj_database_url
 from dotenv import load_dotenv
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 envpath = os.path.join(BASE_DIR, '.env')
 load_dotenv(dotenv_path=envpath)
 
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'DEV')
-DEBUG = os.getenv('DEBUG', False)
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
+DEBUG = json.loads(os.getenv('DEBUG', 'false'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-tx0(q!lqq4qja4z#)608n=%n5yuu!qs8)6rzvza@kx@kilw9gi'
@@ -125,7 +120,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT =  'static/'
 STATICFILES_DIRS = [ 'setup/static' ]
 
 # Default primary key field type
@@ -135,6 +130,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 if ENVIRONMENT == 'PROD':
     USE_X_FORWARDED_HOST = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    MIDDLEWARE.insert(1,'whitenoise.middleware.WhiteNoiseMiddleware')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # CORS
 CORS_ORIGIN_ALLOW_ALL = False

@@ -14,4 +14,5 @@ ADD . /app
 RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
-CMD ["gunicorn", "setup.wsgi", "-b", "0.0.0.0:8000", "--access-logfile", "-"]
+# CMD ["gunicorn", "setup.wsgi", "-b", "0.0.0.0:8000", "--access-logfile", "-"]
+CMD ["/bin/bash", "-c", "python manage.py collectstatic --noinput; gunicorn --bind :8000 --workers 1 setup.wsgi"]
