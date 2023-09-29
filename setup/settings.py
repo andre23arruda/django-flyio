@@ -7,14 +7,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 envpath = os.path.join(BASE_DIR, '.env')
 load_dotenv(dotenv_path=envpath)
 
-ENVIRONMENT = os.getenv('ENVIRONMENT', 'DEV')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '["*"]')
 DEBUG = json.loads(os.getenv('DEBUG', 'false'))
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-tx0(q!lqq4qja4z#)608n=%n5yuu!qs8)6rzvza@kx@kilw9gi'
-
-# ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split()
-ALLOWED_HOSTS =  ['*']
+ENVIRONMENT = os.getenv('ENVIRONMENT', 'DEV')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # Application definition
 INSTALLED_APPS = [
@@ -25,12 +21,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # third party apps
     'rest_framework',
-    'rest_framework.authtoken',
     'corsheaders',
     'drf_yasg',
-    'ssapi',
+    # my apps
+    'library',
     'ping',
+    'profiles',
 ]
 
 MIDDLEWARE = [
@@ -66,12 +64,8 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 
 # Database
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
+    'default': dj_database_url.config(conn_max_age=600)
 }
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 # apps folder
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
@@ -85,22 +79,6 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer',),
 }
 
-# SWAGGER_SETTINGS
-SWAGGER_SETTINGS = {
-    'USE_SESSION_AUTH': False,
-    'LOGIN_URL': 'rest_framework:login',
-    'LOGOUT_URL': 'rest_framework:logout',
-    'VALIDATOR_URL': None,
-    'SECURITY_DEFINITIONS': {
-        'api_key': {
-            'type': 'apiKey',
-            'name': 'Authorization',
-            'in': 'header',
-        },
-    },
-    'REFETCH_SCHEMA_WITH_AUTH': True,
-}
-
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -109,7 +87,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-
 # Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
@@ -117,8 +94,7 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
+# Static files
 STATIC_URL = '/static/'
 STATIC_ROOT =  'static/'
 STATICFILES_DIRS = [ 'setup/static' ]
@@ -137,4 +113,5 @@ if ENVIRONMENT == 'PROD':
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = json.loads(os.getenv('CORS_ALLOWED_ORIGINS', '[]'))
 
-from .theme import JAZZMIN_SETTINGS, JAZZMIN_UI_TWEAKS
+from .config.swagger import SWAGGER_SETTINGS
+from .config.theme import JAZZMIN_SETTINGS, JAZZMIN_UI_TWEAKS

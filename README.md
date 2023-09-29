@@ -16,12 +16,13 @@
 
 Esse projeto está sendo desenvolvido com as seguintes tecnologias:
 
+- [Docker](https://andrearruda-blog.vercel.app/install-docker-on-linux)
 - [Django](https://www.djangoproject.com/)
 - [Django-Rest-Framework](https://www.django-rest-framework.org/)
 - [Fly.io](https://fly.io/dashboard)
 
 ## 💻 Descrição
-**Exemplo de projeto Django para deploy em fly.io**
+**Exemplo de projeto Django para deploy em Fly.io**
 
 
 ## 🔧 Passo a passo
@@ -33,9 +34,6 @@ cp .env.example .env
 # ADICIONE OS VALORES CORRETOS
 
 docker-compose up
-
-# docker-compose run <docker_service> python manage.py createsuperuser # criar superusuario
-docker-compose run api python manage.py createsuperuser # criar superusuario
 ```
 
 
@@ -90,6 +88,6 @@ flyctl deploy
 
 ### Migrate
 ```sh
-flyctl ssh console -C 'python app/manage.py migrate'
-flyctl ssh console -C 'python app/manage.py createsuperuser'
+flyctl ssh console -C 'python manage.py migrate'
+flyctl ssh console -C 'python manage.py createsuperuser'
 ```

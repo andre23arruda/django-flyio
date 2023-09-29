@@ -1,8 +1,9 @@
 from django.apps import AppConfig
 
 
-class SsapiConfig(AppConfig):
+class ProfilesConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'ssapi'
+    name = 'profiles'
+
     def ready(self):
-        from ssapi import signals
+        import profiles.signals
