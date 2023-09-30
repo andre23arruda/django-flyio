@@ -1,5 +1,5 @@
 bash:
-	docker exec -it django-flyio_setup_1 bash
+	docker exec -it app bash
 
 deploy:
 	flyctl deploy
@@ -9,3 +9,6 @@ fly_console:
 
 run:
 	docker-compose up
+
+superuser:
+	docker exec -it app python manage.py createsuperuser
