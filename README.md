@@ -29,10 +29,9 @@ Esse projeto está sendo desenvolvido com as seguintes tecnologias:
 
 ### Rodar local
 ```sh
-# Renomear .env.example para .env
-cp .env.example .env
-# ADICIONE OS VALORES CORRETOS
+make run
 
+# or
 docker-compose up
 ```
 

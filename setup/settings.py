@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 envpath = os.path.join(BASE_DIR, '.env')
 load_dotenv(dotenv_path=envpath)
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '["*"]')
+ALLOWED_HOSTS = json.loads(os.getenv('ALLOWED_HOSTS', '["*"]'))
 DEBUG = json.loads(os.getenv('DEBUG', 'false'))
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'DEV')
 SECRET_KEY = os.getenv('SECRET_KEY')

@@ -23,7 +23,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      ALLOWED_HOSTS: "['*']"
+      ALLOWED_HOSTS: '["localhost", "127.0.0.1", "0.0.0.0", "your-app-name-name.fly.dev"]'
       DEBUG: "true"
       DATABASE_URL: "postgres://local:local@db:5432/ssapi"
       CORS_ALLOWED_ORIGINS: '["http://localhost:3000"]'
