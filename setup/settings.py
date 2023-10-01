@@ -1,12 +1,8 @@
 from pathlib import Path
 import json, os, sys
 import dj_database_url
-from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-envpath = os.path.join(BASE_DIR, '.env')
-load_dotenv(dotenv_path=envpath)
-
 ALLOWED_HOSTS = json.loads(os.getenv('ALLOWED_HOSTS', '["*"]'))
 DEBUG = json.loads(os.getenv('DEBUG', 'false'))
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'DEV')

@@ -35,38 +35,31 @@ make run
 docker-compose up
 ```
 
-
-### Create account
+### Fly.io
+#### Create account
 https://fly.io/dashboard
 
 
-### Install fly
+#### Install fly
 https://fly.io/docs/hands-on/install-flyctl/
 
 
-### Login
+#### Login
 ```sh
 flyctl auth login
 ```
 
-### Criar App
+#### Criar App
 ```sh
 flyctl apps create
 ```
 
-
-### Trocar o nome do app em __fly.toml__ :
+#### Trocar o nome do app em __fly.toml__ :
 ```sh
 app = "your-app-name"
 ```
 
-
-### Adicionar em __setup/settings.py__ :
-```sh
-ALLOWED_HOSTS = ["0.0.0.0", "localhost", "127.0.0.1", "your-app-name-name.fly.dev"]
-```
-
-### Criar DB
+#### Criar DB
 ```sh
 flyctl postgres create
 # só ir aceitando as configurações padrão
@@ -79,13 +72,21 @@ flyctl postgres create
 flyctl postgres attach --app <your-app-name> <your-app-name-db>
 ```
 
+#### Secrets
+```
+flyctl secrets set DATABASE_URL=postgres://your-app-name:xxx@xxx.your-app-name-db.internal:5432/your-app-name
 
-### Deploy
+flyctl secrets set ALLOWED_HOSTS=["your-app-name-name.fly.dev"]
+
+flyctl secrets set CORS_ALLOWED_ORIGINS=["https://your-site.com"]
+```
+
+#### Deploy
 ```sh
 flyctl deploy
 ```
 
-### Migrate
+#### Migrate
 ```sh
 flyctl ssh console -C 'python manage.py migrate'
 flyctl ssh console -C 'python manage.py createsuperuser'
