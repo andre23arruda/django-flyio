@@ -6,3 +6,5 @@ logs/
 media/
 *.md
 .cache
+Makefile
+__pycache__/

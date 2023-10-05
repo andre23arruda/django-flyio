@@ -12,6 +12,8 @@ class ProfileInline(admin.StackedInline):
 
 class UserRegister(UserAdmin):
     inlines = [ProfileInline]
+    list_filter = ['is_staff', 'is_active']
+    search_fields = ['email', 'username']
 
     class Media:
         css = {'all': ('css/stacked-inline.css',)}
