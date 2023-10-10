@@ -5,8 +5,8 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 ALLOWED_HOSTS = json.loads(os.getenv('ALLOWED_HOSTS', '["*"]'))
 DEBUG = json.loads(os.getenv('DEBUG', 'false'))
-ENVIRONMENT = os.getenv('ENVIRONMENT', 'DEV')
-SECRET_KEY = os.getenv('SECRET_KEY')
+ENVIRONMENT = os.getenv('ENVIRONMENT', 'PROD')
+SECRET_KEY = os.getenv('SECRET_KEY', 'SECRET_KEY')
 
 # Application definition
 INSTALLED_APPS = [
@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     'drf_yasg',
     # my apps
     'library',
-    'ping',
     'profiles',
 ]
 

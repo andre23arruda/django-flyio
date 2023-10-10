@@ -24,9 +24,10 @@ services:
       - "8000:8000"
     environment:
       ALLOWED_HOSTS: '["localhost", "127.0.0.1", "0.0.0.0", "your-app-name-name.fly.dev"]'
+      CORS_ALLOWED_ORIGINS: '["http://localhost:3000"]'
       DEBUG: "true"
       DATABASE_URL: "postgres://local:local@db:5432/ssapi"
-      CORS_ALLOWED_ORIGINS: '["http://localhost:3000"]'
+      ENVIRONMENT: "DEV"
       SECRET_KEY: "django-insecure-tx0(q!lqq4qja4z#)608n=%n5yuu!qs8)6rzvza@kx@kilw9gi"
     depends_on:
       db:
